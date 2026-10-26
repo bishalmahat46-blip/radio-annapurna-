@@ -1,0 +1,1600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radio Annapurna Nepal 94.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #C41E3A;
+  --red-dark: #9B1830;
+  --red-light: #E8293F;
+  --deep: #0d0005;
+  --deep-mid: #2a000f;
+  --deep-2: #1a0008;
+  --white: #FFFFFF;
+  --off-white: #F8F8F8;
+  --gray-100: #F3F3F3;
+  --gray-200: #E5E5E5;
+  --gray-400: #9CA3AF;
+  --gray-600: #4B5563;
+  --gray-800: #1F2937;
+  --black: #111111;
+  --sidebar-w: 300px;
+  --header-h: 60px;
+  --stream-h: 44px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--white);color:var(--black);padding-right:var(--sidebar-w)}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+
+/* ── HEADER ── */
+.site-header{
+  position:sticky;top:0;z-index:1000;
+  background:var(--white);
+  border-bottom:2px solid var(--red);
+  height:var(--header-h);
+  display:flex;align-items:center;
+  padding:0 24px;gap:20px;
+  box-shadow:0 2px 12px rgba(196,30,58,0.12);
+}
+.logo-wrap{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.logo-circle{
+  width:44px;height:44px;border-radius:50%;
+  background:var(--red);
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;
+  border:2px solid var(--red-dark);
+}
+.logo-circle span{color:var(--white);font-size:8px;font-weight:900;line-height:1.1;text-align:center}
+.logo-circle .freq{font-size:11px;font-weight:900}
+.logo-text{display:flex;flex-direction:column}
+.logo-text strong{font-size:13px;font-weight:800;color:var(--red);letter-spacing:-.3px}
+.logo-text small{font-size:10px;color:var(--gray-600);font-weight:500}
+
+/* ── NAV ── */
+.main-nav{display:flex;align-items:center;gap:2px;margin-left:auto}
+.nav-item{position:relative}
+.nav-link{
+  display:flex;align-items:center;gap:4px;
+  padding:8px 14px;border-radius:4px;
+  font-size:13px;font-weight:600;letter-spacing:.2px;
+  color:var(--gray-800);transition:all .2s;white-space:nowrap;
+}
+.nav-link:hover,.nav-link.active{color:var(--red)}
+.nav-link .arrow{font-size:9px;transition:transform .2s}
+.nav-item:hover .arrow{transform:rotate(180deg)}
+
+/* FM Mega Dropdown */
+.fm-dropdown{
+  display:none;position:absolute;top:calc(100% + 2px);left:0;
+  background:var(--white);border:1px solid var(--gray-200);
+  border-top:3px solid var(--red);
+  border-radius:0 0 8px 8px;
+  box-shadow:0 16px 40px rgba(0,0,0,0.15);
+  min-width:680px;padding:20px;
+  display:none;z-index:2000;
+}
+.nav-item:hover .fm-dropdown{display:flex!important;gap:20px}
+.fm-col{flex:1}
+.fm-col-title{
+  font-size:10px;font-weight:800;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--red);
+  margin-bottom:10px;padding-bottom:6px;
+  border-bottom:1px solid var(--gray-200);
+}
+.fm-link{
+  display:block;padding:6px 8px;border-radius:4px;
+  font-size:12px;font-weight:500;color:var(--gray-800);
+  transition:all .15s;
+}
+.fm-link:hover{background:var(--red);color:var(--white);padding-left:12px}
+.fm-day-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+
+/* Listen Live button */
+.btn-listen{
+  display:flex;align-items:center;gap:6px;
+  background:var(--red);color:var(--white);
+  padding:8px 18px;border-radius:24px;
+  font-size:12px;font-weight:700;letter-spacing:.5px;
+  text-transform:uppercase;transition:all .2s;
+  margin-left:8px;flex-shrink:0;
+}
+.btn-listen:hover{background:var(--red-dark);transform:translateY(-1px);box-shadow:0 4px 12px rgba(196,30,58,0.35)}
+.live-dot{width:7px;height:7px;border-radius:50%;background:#FF4444;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.4)}}
+
+.header-icons{display:flex;align-items:center;gap:8px;margin-left:8px}
+.icon-btn{
+  width:34px;height:34px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--gray-800);transition:all .2s;font-size:16px;
+}
+.icon-btn:hover{background:var(--gray-100);color:var(--red)}
+
+/* ── LIVE STREAM BAR ── */
+.stream-bar{
+  background:linear-gradient(90deg,var(--deep) 0%,var(--deep-mid) 50%,var(--deep-2) 100%);color:var(--white);
+  height:var(--stream-h);
+  display:flex;align-items:center;gap:16px;
+  padding:0 24px;font-size:12px;
+}
+.stream-label{display:flex;flex-direction:column;line-height:1.2}
+.stream-label strong{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+.stream-label span{font-size:10px;opacity:.85}
+.stream-divider{width:1px;height:24px;background:rgba(255,255,255,.3)}
+.stream-controls{display:flex;align-items:center;gap:8px}
+.s-btn{
+  width:28px;height:28px;border-radius:50%;
+  background:rgba(255,255,255,.2);color:var(--white);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;transition:all .2s;border:1px solid rgba(255,255,255,.3);
+}
+.s-btn:hover{background:rgba(255,255,255,.35)}
+.stream-progress{
+  flex:1;height:3px;background:rgba(255,255,255,.25);
+  border-radius:2px;overflow:hidden;cursor:pointer;
+}
+.stream-progress-fill{
+  height:100%;width:35%;
+  background:var(--white);border-radius:2px;
+  animation:streaming 4s ease-in-out infinite alternate;
+}
+@keyframes streaming{0%{width:30%}100%{width:65%}}
+.stream-vol{display:flex;align-items:center;gap:6px;font-size:16px}
+.vol-bar{width:60px;height:3px;background:rgba(255,255,255,.25);border-radius:2px}
+.vol-fill{width:75%;height:100%;background:var(--white);border-radius:2px}
+
+/* ── RIGHT SIDEBAR RADIO PLAYER ── */
+.radio-sidebar{
+  position:fixed;top:0;right:0;bottom:0;
+  width:var(--sidebar-w);
+  background:linear-gradient(180deg,#0d0005 0%,#1a0008 60%,#0a0003 100%);color:var(--white);
+  z-index:900;display:flex;flex-direction:column;
+  overflow:hidden;
+}
+.sidebar-header{
+  background:var(--red);padding:14px 16px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.sidebar-header h3{font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}
+.sidebar-live{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:600}
+.sidebar-img{
+  width:100%;aspect-ratio:16/9;
+  background:linear-gradient(135deg,#1a1a1a 0%,#2d0a13 100%);
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:8px;position:relative;overflow:hidden;
+}
+.sidebar-img::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 50% 50%,rgba(196,30,58,0.3) 0%,transparent 70%);
+}
+.vinyl{
+  width:80px;height:80px;border-radius:50%;
+  background:conic-gradient(from 0deg,#333,#111,#333,#111,#333);
+  display:flex;align-items:center;justify-content:center;
+  animation:spin 4s linear infinite;position:relative;z-index:1;
+}
+.vinyl-center{
+  width:24px;height:24px;border-radius:50%;
+  background:var(--red);display:flex;align-items:center;justify-content:center;
+}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.now-playing-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.5);position:relative;z-index:1}
+
+.sidebar-info{padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08)}
+.on-air-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  background:var(--red);padding:3px 8px;border-radius:3px;
+  font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;
+  margin-bottom:8px;
+}
+.program-title{font-size:15px;font-weight:700;margin-bottom:4px;line-height:1.3}
+.program-time{font-size:11px;color:rgba(255,255,255,.5);font-weight:500}
+
+.sidebar-schedule{flex:1;overflow-y:auto;padding:14px 16px}
+.sidebar-schedule::-webkit-scrollbar{width:3px}
+.sidebar-schedule::-webkit-scrollbar-track{background:transparent}
+.sidebar-schedule::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:2px}
+.sched-title{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:10px;font-weight:700}
+.sched-item{
+  display:flex;gap:10px;padding:8px 0;
+  border-bottom:1px solid rgba(255,255,255,.06);align-items:flex-start;
+}
+.sched-item:last-child{border:none}
+.sched-time{font-size:10px;color:rgba(255,255,255,.4);font-weight:600;min-width:70px;padding-top:2px}
+.sched-name{font-size:12px;font-weight:500;line-height:1.3}
+.sched-item.current .sched-name{color:var(--red-light);font-weight:700}
+.sched-item.current .sched-time{color:var(--red-light)}
+
+.sidebar-player{
+  padding:14px 16px;border-top:1px solid rgba(255,255,255,.08);
+  display:flex;flex-direction:column;gap:10px;
+}
+.player-controls{display:flex;align-items:center;justify-content:center;gap:12px}
+.p-btn{
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(255,255,255,.1);color:var(--white);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;transition:all .2s;
+}
+.p-btn:hover{background:var(--red)}
+.p-btn.main{width:48px;height:48px;background:var(--red);font-size:18px}
+.p-btn.main:hover{background:var(--red-dark)}
+.player-vol{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.5)}
+.player-vol-bar{flex:1;height:3px;background:rgba(255,255,255,.15);border-radius:2px;cursor:pointer}
+.player-vol-fill{width:70%;height:100%;background:var(--red);border-radius:2px}
+.sidebar-social{display:flex;justify-content:center;gap:12px;padding:0 16px 14px}
+.soc-link{
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(255,255,255,.08);color:rgba(255,255,255,.6);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;transition:all .2s;
+}
+.soc-link:hover{background:var(--red);color:var(--white)}
+
+/* ── MAIN CONTENT ── */
+.main-content{min-height:100vh}
+.page-section{display:none}
+.page-section.active{display:block}
+
+/* ── HOME: HERO ── */
+.hero{
+  background:linear-gradient(135deg,#0d0005 0%,#2a000f 45%,#3a0018 75%,#1a0008 100%);
+  color:var(--white);
+  padding:64px 32px;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;right:-80px;top:-80px;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(196,30,58,0.22) 0%,transparent 70%);
+}
+.hero::after{
+  content:'';position:absolute;left:-60px;bottom:-100px;
+  width:360px;height:360px;border-radius:50%;
+  background:radial-gradient(circle,rgba(196,30,58,0.12) 0%,transparent 70%);
+}
+.hero-inner{max-width:960px;position:relative;z-index:1}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  background:rgba(255,255,255,.15);padding:4px 12px;border-radius:20px;
+  margin-bottom:16px;
+}
+.hero h1{font-size:42px;font-weight:900;line-height:1.05;margin-bottom:12px;letter-spacing:-1px}
+.hero p{font-size:15px;opacity:.85;max-width:520px;line-height:1.6;margin-bottom:24px}
+.hero-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.btn-white{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--white);color:var(--red);
+  padding:10px 24px;border-radius:4px;
+  font-size:13px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
+  transition:all .2s;
+}
+.btn-white:hover{background:var(--gray-100);transform:translateY(-1px)}
+.btn-outline-white{
+  display:inline-flex;align-items:center;gap:8px;
+  background:transparent;color:var(--white);
+  border:2px solid rgba(255,255,255,.5);
+  padding:10px 24px;border-radius:4px;
+  font-size:13px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
+  transition:all .2s;
+}
+.btn-outline-white:hover{border-color:var(--white);background:rgba(255,255,255,.1)}
+
+/* On-air strip */
+.onair-strip{
+  background:linear-gradient(90deg,#0d0005 0%,#1f000c 50%,#150007 100%);color:var(--white);
+  padding:12px 32px;display:flex;gap:0;
+  border-bottom:1px solid rgba(255,255,255,.1);
+}
+.onair-card{
+  flex:1;padding:8px 20px;border-right:1px solid rgba(255,255,255,.15);
+  display:flex;flex-direction:column;gap:3px;
+}
+.onair-card:last-child{border:none}
+.onair-label{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;opacity:.6;font-weight:700}
+.onair-time{font-size:11px;color:rgba(255,255,255,.7);font-weight:600}
+.onair-prog{font-size:13px;font-weight:700}
+.onair-card.current{background:rgba(255,255,255,.08);border-radius:4px}
+.onair-card.current .onair-label{color:#FF8888}
+
+/* ── SECTION LAYOUTS ── */
+.section{padding:40px 32px}
+.section-alt{background:var(--off-white)}
+.section-red{background:linear-gradient(135deg,#0d0005 0%,#2a000f 50%,#1a0008 100%);color:var(--white)}
+.section-header{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  margin-bottom:24px;
+}
+.section-title{
+  font-size:26px;font-weight:900;letter-spacing:-.5px;color:var(--black);
+  position:relative;
+}
+.section-title::after{
+  content:'';display:block;width:100%;height:3px;
+  background:var(--red);margin-top:6px;border-radius:2px;
+}
+.section-red .section-title{color:var(--white)}
+.section-red .section-title::after{background:rgba(255,255,255,.4)}
+.view-all{
+  font-size:12px;font-weight:700;color:var(--red);
+  display:flex;align-items:center;gap:4px;letter-spacing:.5px;
+  text-transform:uppercase;transition:gap .2s;
+}
+.view-all:hover{gap:8px}
+.section-red .view-all{color:rgba(255,255,255,.8)}
+
+/* ── PROGRAM GRID ── */
+.prog-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:16px;
+}
+.prog-card{
+  background:var(--white);border-radius:8px;overflow:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.07);
+  transition:all .25s;cursor:pointer;border:1px solid var(--gray-200);
+}
+.prog-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,0,0,.14);border-color:var(--red)}
+.prog-thumb{
+  aspect-ratio:16/10;
+  background:linear-gradient(135deg,var(--red-dark) 0%,var(--red) 50%,#8B0000 100%);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.prog-thumb .radio-logo-sm{
+  width:60px;height:60px;border-radius:50%;
+  background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.3);
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
+  color:var(--white);font-size:7px;font-weight:900;text-align:center;line-height:1.1;
+}
+.prog-thumb .radio-logo-sm .f{font-size:11px;font-weight:900}
+.prog-thumb-badge{
+  position:absolute;top:8px;right:8px;
+  background:rgba(0,0,0,.5);color:var(--white);
+  font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;letter-spacing:.5px;
+}
+.prog-body{padding:10px 12px}
+.prog-body h4{font-size:12px;font-weight:700;color:var(--black);line-height:1.3}
+.prog-body span{font-size:10px;color:var(--gray-400);margin-top:3px;display:block}
+
+/* ── NEWS GRID ── */
+.news-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:20px;
+}
+.news-card{cursor:pointer;transition:all .2s}
+.news-card:hover .news-card-img{transform:scale(1.04)}
+.news-card-img-wrap{border-radius:6px;overflow:hidden;aspect-ratio:4/3;background:var(--gray-200);margin-bottom:10px}
+.news-card-img{
+  width:100%;height:100%;object-fit:cover;
+  background:linear-gradient(135deg,var(--gray-200),var(--gray-100));
+  transition:transform .35s;display:flex;align-items:center;justify-content:center;
+  font-size:32px;
+}
+.news-card h4{font-size:13px;font-weight:700;line-height:1.4;color:var(--black)}
+.news-card h4:hover{color:var(--red)}
+.news-card time{font-size:10px;color:var(--gray-400);margin-top:4px;display:block}
+
+/* ── GALLERY ── */
+.gallery-tabs{display:flex;gap:0;margin-bottom:20px;border-bottom:2px solid var(--gray-200)}
+.g-tab{
+  padding:10px 20px;font-size:13px;font-weight:700;
+  color:var(--gray-600);cursor:pointer;transition:all .2s;
+  border-bottom:3px solid transparent;margin-bottom:-2px;
+}
+.g-tab.active,.g-tab:hover{color:var(--red);border-bottom-color:var(--red)}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.gallery-item{
+  aspect-ratio:4/3;border-radius:6px;
+  background:linear-gradient(135deg,var(--red-dark),var(--red));
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;cursor:pointer;transition:all .2s;overflow:hidden;position:relative;
+}
+.gallery-item:hover{transform:scale(1.03);box-shadow:0 8px 20px rgba(196,30,58,0.3)}
+.gallery-item-overlay{
+  position:absolute;inset:0;background:rgba(0,0,0,.4);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .2s;
+}
+.gallery-item:hover .gallery-item-overlay{opacity:1}
+.play-overlay{
+  width:44px;height:44px;border-radius:50%;
+  background:var(--white);display:flex;align-items:center;justify-content:center;
+  color:var(--red);font-size:16px;
+}
+
+/* ── PODCAST ── */
+.podcast-list{display:flex;flex-direction:column;gap:12px}
+.podcast-item{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 16px;background:var(--white);border-radius:8px;
+  border:1px solid var(--gray-200);cursor:pointer;transition:all .2s;
+}
+.podcast-item:hover{border-color:var(--red);box-shadow:0 4px 12px rgba(196,30,58,.1)}
+.pod-icon{
+  width:48px;height:48px;border-radius:50%;flex-shrink:0;
+  background:var(--gray-100);display:flex;align-items:center;justify-content:center;
+  color:var(--red);font-size:20px;border:2px solid var(--gray-200);
+}
+.pod-info{flex:1;min-width:0}
+.pod-info h4{font-size:13px;font-weight:600;color:var(--black);line-height:1.4;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pod-info span{font-size:11px;color:var(--gray-400)}
+.pod-listen{
+  flex-shrink:0;display:flex;align-items:center;gap:5px;
+  background:var(--red);color:var(--white);
+  padding:6px 14px;border-radius:20px;font-size:11px;font-weight:700;
+  transition:all .2s;
+}
+.pod-listen:hover{background:var(--red-dark)}
+
+/* ── RJ GRID ── */
+.rj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:20px}
+.rj-card{text-align:center;cursor:pointer}
+.rj-avatar{
+  width:100%;aspect-ratio:1;border-radius:50%;
+  background:linear-gradient(135deg,var(--red-dark),var(--red));
+  display:flex;align-items:center;justify-content:center;
+  font-size:36px;margin-bottom:12px;
+  border:3px solid var(--red);transition:all .25s;
+  overflow:hidden;
+}
+.rj-card:hover .rj-avatar{border-color:var(--red-dark);transform:scale(1.05);box-shadow:0 8px 24px rgba(196,30,58,.3)}
+.rj-card h4{font-size:13px;font-weight:700;color:var(--black)}
+.rj-card span{font-size:11px;color:var(--gray-400)}
+
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.about-visual{
+  background:linear-gradient(135deg,var(--red-dark) 0%,var(--red) 60%,#8B0000 100%);
+  border-radius:12px;padding:40px;
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
+  gap:12px;aspect-ratio:4/3;
+}
+.about-visual .big-logo{
+  width:100px;height:100px;border-radius:50%;
+  background:rgba(255,255,255,.15);border:3px solid rgba(255,255,255,.4);
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
+  color:var(--white);font-size:12px;font-weight:900;text-align:center;line-height:1.2;
+}
+.about-visual .big-logo .bf{font-size:20px}
+.about-visual p{color:rgba(255,255,255,.9);font-size:14px;font-weight:700;text-align:center}
+.about-text h2{font-size:28px;font-weight:900;margin-bottom:14px;letter-spacing:-.5px}
+.about-text p{font-size:14px;line-height:1.7;color:var(--gray-600);margin-bottom:16px}
+.about-text .btn-red{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--red);color:var(--white);
+  padding:10px 22px;border-radius:4px;font-size:12px;font-weight:700;letter-spacing:.5px;
+  text-transform:uppercase;transition:all .2s;
+}
+.about-text .btn-red:hover{background:var(--red-dark);transform:translateY(-1px)}
+
+/* ── SISTER CONCERN ── */
+.sister-grid{display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap}
+/* Get Connected icons */
+.gc-icon{
+  width:44px;height:44px;border-radius:50%;
+  background:var(--white);border:1.5px solid var(--gray-200);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--gray-600);transition:all .22s;
+  box-shadow:0 1px 4px rgba(0,0,0,.06);
+}
+.gc-icon:hover{border-color:var(--red);color:var(--red);background:var(--white);transform:translateY(-2px);box-shadow:0 4px 12px rgba(196,30,58,.15)}
+
+.sister-logo{
+  height:56px;display:flex;align-items:center;justify-content:center;
+  filter:none;opacity:1;transition:all .25s;
+  padding:6px 12px;
+}
+.sister-logo:hover{transform:scale(1.06);opacity:.85}
+.sister-logo-box{
+  padding:8px 20px;background:var(--white);border:1px solid var(--gray-200);
+  border-radius:6px;height:48px;display:flex;align-items:center;justify-content:center;
+  font-size:18px;font-weight:900;color:var(--gray-800);transition:all .2s;cursor:pointer;
+}
+.sister-logo-box:hover{border-color:var(--red);color:var(--red);box-shadow:0 4px 12px rgba(196,30,58,.15)}
+
+/* ── FOOTER ── */
+footer{
+  background:linear-gradient(135deg,#0a0003 0%,#1a0008 100%);color:var(--white);
+  padding:40px 32px 20px;
+}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:32px}
+.footer-brand h3{font-size:16px;font-weight:900;color:var(--red);margin-bottom:8px}
+.footer-brand p{font-size:12px;line-height:1.7;color:rgba(255,255,255,.5);max-width:260px}
+.footer-col h4{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:14px}
+.footer-links{display:flex;flex-direction:column;gap:8px}
+.footer-links a{font-size:12px;color:rgba(255,255,255,.6);transition:color .2s}
+.footer-links a:hover{color:var(--red)}
+.social-row{display:flex;gap:10px;margin-top:16px}
+.soc-icon{
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(255,255,255,.08);color:rgba(255,255,255,.6);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;transition:all .2s;
+}
+.soc-icon:hover{background:var(--red);color:var(--white)}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.08);
+  padding-top:20px;display:flex;align-items:center;justify-content:space-between;
+  font-size:11px;color:rgba(255,255,255,.3);
+}
+
+/* ── PROGRAM SCHEDULE PAGE ── */
+.day-tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:24px;border-bottom:2px solid var(--gray-200);padding-bottom:0}
+.day-tab{
+  padding:10px 18px;font-size:12px;font-weight:700;
+  color:var(--gray-600);cursor:pointer;transition:all .2s;
+  border-bottom:3px solid transparent;margin-bottom:-2px;
+  text-transform:uppercase;letter-spacing:.5px;
+}
+.day-tab.active,.day-tab:hover{color:var(--red);border-bottom-color:var(--red)}
+.day-panel{display:none}
+.day-panel.active{display:block}
+.schedule-list{display:flex;flex-direction:column;gap:0}
+.sched-row{
+  display:flex;align-items:center;gap:0;
+  border-bottom:1px solid var(--gray-200);padding:14px 0;transition:background .15s;
+}
+.sched-row:hover{background:var(--gray-100)}
+.sched-row-time{
+  min-width:110px;font-size:12px;font-weight:700;color:var(--red);padding:0 16px;
+}
+.sched-row-icon{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--gray-100);display:flex;align-items:center;justify-content:center;
+  color:var(--red);font-size:16px;margin-right:14px;flex-shrink:0;border:2px solid var(--gray-200);
+}
+.sched-row-info{flex:1}
+.sched-row-info h4{font-size:13px;font-weight:700;color:var(--black)}
+.sched-row-info span{font-size:11px;color:var(--gray-400)}
+.sched-row-type{
+  font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;
+  background:var(--gray-100);color:var(--gray-600);
+  padding:3px 8px;border-radius:20px;margin-right:16px;
+}
+
+/* ── EVENT PAGE ── */
+.event-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}
+.event-card{
+  border-radius:10px;overflow:hidden;cursor:pointer;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+  transition:all .25s;border:1px solid var(--gray-200);
+}
+.event-card:hover{transform:translateY(-4px);box-shadow:0 14px 32px rgba(0,0,0,.14);border-color:var(--red)}
+.event-thumb{
+  aspect-ratio:16/10;
+  background:linear-gradient(135deg,var(--red-dark),var(--red));
+  display:flex;align-items:center;justify-content:center;font-size:40px;
+  position:relative;
+}
+.event-thumb-badge{
+  position:absolute;top:10px;left:10px;
+  background:var(--red);color:var(--white);
+  font-size:9px;font-weight:800;padding:3px 8px;border-radius:3px;letter-spacing:1px;
+}
+.event-body{padding:12px 14px;background:var(--white)}
+.event-body h4{font-size:13px;font-weight:700;color:var(--black);line-height:1.3}
+.event-body span{font-size:11px;color:var(--gray-400);margin-top:4px;display:block}
+
+/* ── LISTEN LIVE PAGE ── */
+.listen-hero{
+  background:linear-gradient(135deg,#0d0005 0%,#2a000f 50%,#1a0008 100%);
+  padding:60px 32px;text-align:center;color:var(--white);
+}
+.listen-hero h1{font-size:36px;font-weight:900;margin-bottom:12px}
+.listen-hero p{font-size:14px;opacity:.85;max-width:500px;margin:0 auto 28px}
+.big-play{
+  width:80px;height:80px;border-radius:50%;
+  background:var(--white);color:var(--red);
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;margin:0 auto 20px;cursor:pointer;
+  box-shadow:0 0 0 12px rgba(255,255,255,.15);
+  transition:all .2s;
+}
+.big-play:hover{transform:scale(1.08);box-shadow:0 0 0 16px rgba(255,255,255,.15)}
+.listen-card{
+  max-width:600px;margin:32px auto 0;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);
+  border-radius:12px;padding:24px;backdrop-filter:blur(4px);
+}
+.listen-card-prog{font-size:18px;font-weight:800;margin-bottom:4px}
+.listen-card-time{font-size:12px;opacity:.7}
+
+/* ── KHABAR PAGE ── */
+.khabar-hero{
+  background:linear-gradient(135deg,#0d0005 0%,#2a000f 50%,#1a0008 100%);color:var(--white);
+  padding:30px 32px;
+}
+.khabar-hero h1{font-size:28px;font-weight:900;margin-bottom:6px}
+.khabar-grid-large{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+
+/* ── SEARCH OVERLAY ── */
+.search-overlay{
+  display:none;position:fixed;inset:0;z-index:9999;
+  background:rgba(0,0,0,.85);backdrop-filter:blur(4px);
+  align-items:flex-start;justify-content:center;padding-top:80px;
+}
+.search-overlay.open{display:flex}
+.search-box{
+  width:100%;max-width:600px;
+  background:var(--white);border-radius:8px;overflow:hidden;
+  box-shadow:0 24px 60px rgba(0,0,0,.4);
+}
+.search-input{
+  width:100%;padding:18px 20px;font-size:18px;font-weight:500;
+  border:none;outline:none;font-family:inherit;color:var(--black);
+}
+.search-close{
+  position:absolute;top:24px;right:24px;
+  color:var(--white);font-size:24px;cursor:pointer;
+  width:36px;height:36px;display:flex;align-items:center;justify-content:center;
+  border-radius:50%;background:rgba(255,255,255,.1);transition:all .2s;
+}
+.search-close:hover{background:rgba(255,255,255,.2)}
+
+/* ── PAGE HEADER for inner pages ── */
+.page-header{
+  background:linear-gradient(135deg,#0d0005 0%,#2a000f 50%,#1a0008 100%);
+  color:var(--white);padding:28px 32px;
+}
+.page-header .breadcrumb{
+  font-size:11px;opacity:.6;margin-bottom:6px;
+  display:flex;gap:6px;align-items:center;
+}
+.page-header h1{font-size:28px;font-weight:900;letter-spacing:-.5px}
+
+/* Animations */
+.fade-in{animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ── PHOTOS ── */
+.ph-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.ph-img.dim{opacity:.45}
+.ph-fill{width:100%;height:100%;object-fit:cover;display:block}
+.prog-thumb>*:not(.ph-img),.event-thumb>*:not(.ph-img),.gallery-item>*:not(.ph-img),.sidebar-img>*:not(.ph-img),.about-visual>*:not(.ph-img){z-index:2}
+.prog-thumb::after,.event-thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.55));z-index:1}
+.event-thumb>span:not([class]),.gallery-item>span{display:none}
+.about-visual{position:relative;overflow:hidden}.sidebar-img{position:relative}
+.rj-avatar{position:relative}.pod-icon{overflow:hidden}
+.hero{background-image:linear-gradient(135deg,rgba(13,0,5,.88),rgba(58,0,24,.78)),url('https://annapurnaradio.prixacdn.net/static/assets/images/radio-banner.png');background-size:cover;background-position:center}
+</style>
+</head>
+<body>
+
+<!-- ════ SEARCH OVERLAY ════ -->
+<div class="search-overlay" id="searchOverlay">
+  <div style="position:relative;width:100%;max-width:600px">
+    <div class="search-box">
+      <input class="search-input" type="text" placeholder="Search programs, news, events..." id="searchInput">
+    </div>
+    <button class="search-close" onclick="closeSearch()">✕</button>
+  </div>
+</div>
+
+<!-- ════ RIGHT SIDEBAR RADIO PLAYER ════ -->
+<aside class="radio-sidebar">
+  <div class="sidebar-header">
+    <h3>&#9654; Air Radio</h3>
+    <div class="sidebar-live"><span class="live-dot"></span> LIVE</div>
+  </div>
+  <div class="sidebar-img"><img class="ph-img dim" src="https://annapurnaradio.prixacdn.net/media/albums/dzdwwsyeqya4tnn51rhirv7hgdw6nxgndwm9h8znqojtmhetuuffibml1h2r.jpg" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()">
+    <div class="vinyl">
+      <div class="vinyl-center">
+        <span style="color:#fff;font-size:8px;font-weight:900">94</span>
+      </div>
+    </div>
+    <span class="now-playing-label">Now Playing</span>
+  </div>
+  <div class="sidebar-info">
+    <div class="on-air-badge"><span class="live-dot"></span> ON AIR</div>
+    <div class="program-title">Radio Power (Repeat)</div>
+    <div class="program-time">6:30 a.m. – 7 a.m.</div>
+  </div>
+  <div class="sidebar-player">
+    <div class="player-controls">
+      <button class="p-btn" title="Previous">&#9664;&#9664;</button>
+      <button class="p-btn main" id="playBtn" onclick="togglePlay()">&#9654;</button>
+      <button class="p-btn" title="Next">&#9654;&#9654;</button>
+    </div>
+    <div class="player-vol">
+      <span>&#128266;</span>
+      <div class="player-vol-bar"><div class="player-vol-fill"></div></div>
+      <span>&#128264;</span>
+    </div>
+  </div>
+  <div class="sidebar-schedule">
+    <div class="sched-title">Today's Schedule</div>
+    <div class="sched-item current">
+      <span class="sched-time">6:30–7:00</span>
+      <span class="sched-name">Radio Power (Repeat)</span>
+    </div>
+    <div class="sched-item">
+      <span class="sched-time">7:00–8:00</span>
+      <span class="sched-name">Shubharambha</span>
+    </div>
+    <div class="sched-item">
+      <span class="sched-time">8:00–9:00</span>
+      <span class="sched-name">Sauryya Chatari</span>
+    </div>
+    <div class="sched-item">
+      <span class="sched-time">9:00–10:00</span>
+      <span class="sched-name">National Song</span>
+    </div>
+    <div class="sched-item">
+      <span class="sched-time">10:00–11:00</span>
+      <span class="sched-name">Song with PSA</span>
+    </div>
+    <div class="sched-item">
+      <span class="sched-time">11:00–12:00</span>
+      <span class="sched-name">Annapurna Celebrity</span>
+    </div>
+    <div class="sched-item">
+      <span class="sched-time">12:00–13:00</span>
+      <span class="sched-name">Annapurna Khabar</span>
+    </div>
+    <div class="sched-item">
+      <span class="sched-time">13:00–14:00</span>
+      <span class="sched-name">Music with Slogan</span>
+    </div>
+    <div class="sched-item">
+      <span class="sched-time">14:00–15:00</span>
+      <span class="sched-name">BBC Nepal Sewa</span>
+    </div>
+    <div class="sched-item">
+      <span class="sched-time">15:00–17:00</span>
+      <span class="sched-name">Radio Power</span>
+    </div>
+    <div class="sched-item">
+      <span class="sched-time">17:00–18:00</span>
+      <span class="sched-name">Shubhasrota</span>
+    </div>
+    <div class="sched-item">
+      <span class="sched-time">18:00–19:00</span>
+      <span class="sched-name">Guru Dristi &amp; Jivan Bigyan</span>
+    </div>
+    <div class="sched-item">
+      <span class="sched-time">19:00–20:00</span>
+      <span class="sched-name">Mayar Jyu</span>
+    </div>
+  </div>
+  <div class="sidebar-social">
+    <a href="#" class="soc-link" title="Facebook">&#x66;</a>
+    <a href="#" class="soc-link" title="Twitter">&#116;</a>
+    <a href="#" class="soc-link" title="Instagram">&#9783;</a>
+    <a href="#" class="soc-link" title="YouTube">&#9654;</a>
+  </div>
+</aside>
+
+<!-- ════ SITE HEADER ════ -->
+<header class="site-header">
+  <div class="logo-wrap" onclick="showPage('home')" style="cursor:pointer">
+    <div class="logo-circle">
+      <span class="freq">−94.0−</span>
+    </div>
+    <div class="logo-text">
+      <strong>Radio Annapurna Nepal</strong>
+      <small>94.0 FM · Nepal's Voice</small>
+    </div>
+  </div>
+
+  <nav class="main-nav">
+    <div class="nav-item">
+      <a class="nav-link active" href="#" onclick="showPage('home');return false">Home</a>
+    </div>
+
+    <!-- FM Mega Menu -->
+    <div class="nav-item">
+      <a class="nav-link" href="#" onclick="showPage('program');return false">
+        FM 94.0 <span class="arrow">▾</span>
+      </a>
+      <div class="fm-dropdown" id="fmDropdown">
+        <div class="fm-col">
+          <div class="fm-col-title">On Air</div>
+          <a class="fm-link" href="#" onclick="showPage('listen');return false">&#9654; Live Stream</a>
+          <a class="fm-link" href="#" onclick="showPage('listen');return false">&#9673; Currently On Air</a>
+          <a class="fm-link" href="#" onclick="showPage('program');return false">&#128337; Coming Up Next</a>
+          <a class="fm-link" href="#" onclick="showPage('program');return false">&#128197; Full Schedule</a>
+        </div>
+        <div class="fm-col">
+          <div class="fm-col-title">Schedule by Day</div>
+          <div class="fm-day-grid">
+            <a class="fm-link" href="#" onclick="showPage('program','sunday');return false">Sunday</a>
+            <a class="fm-link" href="#" onclick="showPage('program','monday');return false">Monday</a>
+            <a class="fm-link" href="#" onclick="showPage('program','tuesday');return false">Tuesday</a>
+            <a class="fm-link" href="#" onclick="showPage('program','wednesday');return false">Wednesday</a>
+            <a class="fm-link" href="#" onclick="showPage('program','thursday');return false">Thursday</a>
+            <a class="fm-link" href="#" onclick="showPage('program','friday');return false">Friday</a>
+            <a class="fm-link" href="#" onclick="showPage('program','saturday');return false">Saturday</a>
+          </div>
+        </div>
+        <div class="fm-col">
+          <div class="fm-col-title">Programs</div>
+          <a class="fm-link" href="#" onclick="showPage('program');return false">Shubharambha</a>
+          <a class="fm-link" href="#" onclick="showPage('program');return false">Radio Power</a>
+          <a class="fm-link" href="#" onclick="showPage('program');return false">Annapurna Khabar</a>
+          <a class="fm-link" href="#" onclick="showPage('program');return false">Annapurna Celebrity</a>
+          <a class="fm-link" href="#" onclick="showPage('program');return false">BBC Nepal Sewa</a>
+          <a class="fm-link" href="#" onclick="showPage('program');return false">Guru Dristi &amp; Jivan Bigyan</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-item">
+      <a class="nav-link" href="#" onclick="showPage('program');return false">Program</a>
+    </div>
+    <div class="nav-item">
+      <a class="nav-link" href="#" onclick="showPage('khabar');return false">Annapurna Khabar</a>
+    </div>
+    <div class="nav-item">
+      <a class="nav-link" href="#" onclick="showPage('event');return false">Event</a>
+    </div>
+    <div class="nav-item">
+      <a class="nav-link" href="#" onclick="showPage('podcast');return false">Podcast</a>
+    </div>
+
+    <a class="btn-listen" href="#" onclick="showPage('listen');return false">
+      <span class="live-dot"></span> LISTEN LIVE
+    </a>
+  </nav>
+
+  <div class="header-icons">
+    <button class="icon-btn" onclick="openSearch()" title="Search">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+    <circle cx="10.5" cy="10.5" r="7.5"/>
+    <line x1="16.5" y1="16.5" x2="22" y2="22"/>
+    <path d="M8 8.5 Q9 7 10.5 7" stroke-width="1.4" opacity="0.5"/>
+  </svg>
+</button>
+    <button class="icon-btn" title="Menu">&#9776;</button>
+  </div>
+</header>
+
+<!-- ════ LIVE STREAMING BAR ════ -->
+<div class="stream-bar">
+  <div class="stream-label">
+    <strong>LIVE STREAMING</strong>
+    <span>Radio Annapurna Nepal 94.0 | Live</span>
+  </div>
+  <div class="stream-divider"></div>
+  <div class="stream-controls">
+    <button class="s-btn">&#9664;&#9664;</button>
+    <button class="s-btn">&#9654;</button>
+    <button class="s-btn">&#9646;&#9646;</button>
+  </div>
+  <div class="stream-progress">
+    <div class="stream-progress-fill"></div>
+  </div>
+  <div class="stream-vol">
+    <span>&#128266;</span>
+    <div class="vol-bar"><div class="vol-fill"></div></div>
+    <span style="font-size:12px;opacity:.7">VOL</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     PAGES
+════════════════════════════════════════ -->
+
+<!-- ══ HOME ══ -->
+<section class="page-section active fade-in" id="page-home">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow"><span class="live-dot"></span> Broadcasting Live · 94.0 FM</div>
+      <h1>Nepal's Premier<br>Radio Voice</h1>
+      <p>Radio Annapurna Nepal 94.0 — delivering trustworthy news, informative programs, and entertaining broadcasts to listeners across Nepal since 2009.</p>
+      <div class="hero-actions">
+        <a class="btn-white" href="#" onclick="showPage('listen');return false">&#9654; Listen Live Now</a>
+        <a class="btn-outline-white" href="#" onclick="showPage('program');return false">&#128197; View Schedule</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- On Air Strip -->
+  <div class="onair-strip">
+    <div class="onair-card current">
+      <span class="onair-label">&#9673; Live On Air</span>
+      <span class="onair-time">6:30 a.m. – 7 a.m.</span>
+      <span class="onair-prog">Radio Power (Repeat)</span>
+    </div>
+    <div class="onair-card">
+      <span class="onair-label">Coming Up Next</span>
+      <span class="onair-time">7:00 a.m. – 8 a.m.</span>
+      <span class="onair-prog">Shubharambha</span>
+    </div>
+    <div class="onair-card">
+      <span class="onair-label">Later On</span>
+      <span class="onair-time">8:00 a.m. – 9 a.m.</span>
+      <span class="onair-prog">Sauryya Chatari</span>
+    </div>
+    <div class="onair-card">
+      <span class="onair-label" style="cursor:pointer;text-decoration:underline" onclick="showPage('program')">View Full Schedule &#8250;</span>
+      <span class="onair-time">&nbsp;</span>
+      <span class="onair-prog">All 7 days available</span>
+    </div>
+  </div>
+
+  <!-- Programs Grid -->
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title">Programs</h2>
+      <a class="view-all" href="#" onclick="showPage('program');return false">All Programs &#8250;</a>
+    </div>
+    <div class="prog-grid">
+      <!-- cards -->
+      <div class="prog-card">
+        <div class="prog-thumb"><img class="ph-img" src="https://annapurnaradio.prixacdn.net/media/albums/dzdwwsyeqya4tnn51rhirv7hgdw6nxgndwm9h8znqojtmhetuuffibml1h2r.jpg" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()">
+          <div class="radio-logo-sm"><span class="f">−94−</span><span>Radio<br>Annapurna</span></div>
+          <span class="prog-thumb-badge">LIVE</span>
+        </div>
+        <div class="prog-body"><h4>Sauryya Chatari (S/S)</h4><span>5:00 – 6:00 a.m.</span></div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-thumb" style="background:linear-gradient(135deg,#6B0000,#C41E3A)"><img class="ph-img" src="https://annapurnaradio.prixacdn.net/media/albums/8boz0f1lc3hruuwoyr5vhfdgcixu4mg7tsxhghbbtqq3z3plmh1epspcho13.webp" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()">
+          <div class="radio-logo-sm"><span class="f">−94−</span><span>Radio<br>Annapurna</span></div>
+        </div>
+        <div class="prog-body"><h4>National Song</h4><span>6:00 – 6:30 a.m.</span></div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-thumb" style="background:linear-gradient(135deg,#8B0000,#C41E3A)"><img class="ph-img" src="https://annapurnaradio.prixacdn.net/media/albums/pxeidv195av8eorqom8mlk2aoj3yiuvzkh5rg4sd3lvbghmbmdtnjnjbqv06.JPG" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()">
+          <div class="radio-logo-sm"><span class="f">−94−</span><span>Radio<br>Annapurna</span></div>
+          <span class="prog-thumb-badge">ON NOW</span>
+        </div>
+        <div class="prog-body"><h4>Radio Power (Repeat)</h4><span>6:30 – 7:00 a.m.</span></div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-thumb" style="background:linear-gradient(135deg,#700,#E8293F)"><img class="ph-img" src="https://annapurnaradio.prixacdn.net/media/albums/ua5vv6itrawcnkvofmo7rm5p6lqgxzvp8yrylwoen8ifxsxmz6lepbfx7gyt.jpg" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()">
+          <div class="radio-logo-sm"><span class="f">−94−</span><span>Radio<br>Annapurna</span></div>
+        </div>
+        <div class="prog-body"><h4>Shubharambha</h4><span>7:00 – 8:00 a.m.</span></div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-thumb" style="background:linear-gradient(135deg,#5a0000,#C41E3A)"><img class="ph-img" src="https://www.radioannapurnanepal.com/media/1680363706.jpg" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()">
+          <div class="radio-logo-sm"><span class="f">−94−</span><span>Radio<br>Annapurna</span></div>
+        </div>
+        <div class="prog-body"><h4>Shubhasrota</h4><span>8:00 – 9:00 a.m.</span></div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-thumb" style="background:linear-gradient(135deg,#9B1830,#C41E3A)"><img class="ph-img" src="https://www.radioannapurnanepal.com/media/1634638956.png" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()">
+          <div class="radio-logo-sm"><span class="f">−94−</span><span>Radio<br>Annapurna</span></div>
+        </div>
+        <div class="prog-body"><h4>Song with PSA</h4><span>9:00 – 10:00 a.m.</span></div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-thumb" style="background:linear-gradient(135deg,#4a0000,#B22234)"><img class="ph-img" src="https://annapurnaradio.prixacdn.net/media/albums/dzdwwsyeqya4tnn51rhirv7hgdw6nxgndwm9h8znqojtmhetuuffibml1h2r.jpg" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()">
+          <div class="radio-logo-sm"><span class="f">−94−</span><span>Radio<br>Annapurna</span></div>
+        </div>
+        <div class="prog-body"><h4>Radio Power</h4><span>10:00 – 11:00 a.m.</span></div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-thumb" style="background:linear-gradient(135deg,#800010,#C41E3A)"><img class="ph-img" src="https://annapurnaradio.prixacdn.net/media/albums/8boz0f1lc3hruuwoyr5vhfdgcixu4mg7tsxhghbbtqq3z3plmh1epspcho13.webp" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()">
+          <div class="radio-logo-sm"><span class="f">−94−</span><span>Radio<br>Annapurna</span></div>
+        </div>
+        <div class="prog-body"><h4>Annapurna Khabar</h4><span>11:00 – 12:00 p.m.</span></div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-thumb" style="background:linear-gradient(135deg,#6B0000,#E8293F)"><img class="ph-img" src="https://annapurnaradio.prixacdn.net/media/albums/pxeidv195av8eorqom8mlk2aoj3yiuvzkh5rg4sd3lvbghmbmdtnjnjbqv06.JPG" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()">
+          <div class="radio-logo-sm"><span class="f">−94−</span><span>Radio<br>Annapurna</span></div>
+        </div>
+        <div class="prog-body"><h4>Music with Slogan</h4><span>12:00 – 1:00 p.m.</span></div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-thumb" style="background:linear-gradient(135deg,#8B0000,#C41E3A)"><img class="ph-img" src="https://annapurnaradio.prixacdn.net/media/albums/ua5vv6itrawcnkvofmo7rm5p6lqgxzvp8yrylwoen8ifxsxmz6lepbfx7gyt.jpg" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()">
+          <div class="radio-logo-sm"><span class="f">−94−</span><span>Radio<br>Annapurna</span></div>
+        </div>
+        <div class="prog-body"><h4>BBC Nepal Sewa</h4><span>1:00 – 2:00 p.m.</span></div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-thumb" style="background:linear-gradient(135deg,#500020,#C41E3A)"><img class="ph-img" src="https://www.radioannapurnanepal.com/media/1680363706.jpg" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()">
+          <div class="radio-logo-sm"><span class="f">−94−</span><span>Radio<br>Annapurna</span></div>
+        </div>
+        <div class="prog-body"><h4>Annapurna Celebrity</h4><span>2:00 – 3:00 p.m.</span></div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-thumb" style="background:linear-gradient(135deg,#7a0000,#B22234)"><img class="ph-img" src="https://www.radioannapurnanepal.com/media/1634638956.png" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()">
+          <div class="radio-logo-sm"><span class="f">−94−</span><span>Radio<br>Annapurna</span></div>
+        </div>
+        <div class="prog-body"><h4>Guru Dristi &amp; Jivan Bigyan</h4><span>5:00 – 6:00 p.m.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Annapurna Khabar Section -->
+  <div class="section section-alt">
+    <div class="section-header">
+      <h2 class="section-title">Annapurna Khabar</h2>
+      <a class="view-all" href="#" onclick="showPage('khabar');return false">All News &#8250;</a>
+    </div>
+    <div class="news-grid">
+      <div class="news-card" onclick="showPage('khabar')">
+        <div class="news-card-img-wrap"><img class="news-card-img" src="https://annapurnaradio.prixacdn.net/media/albums/dzdwwsyeqya4tnn51rhirv7hgdw6nxgndwm9h8znqojtmhetuuffibml1h2r.jpg" alt="Annapurna Khabar" loading="lazy" onerror="this.remove()"></div>
+        <h4>काठमाडौं लिगेसीको आयोजनामा मित्रपार्कमा 'यःमरी पुही युनिटि फेस्ट' हुदँ</h4>
+        <time>२०२३, साउन १८</time>
+      </div>
+      <div class="news-card" onclick="showPage('khabar')">
+        <div class="news-card-img-wrap"><img class="news-card-img" src="https://annapurnaradio.prixacdn.net/media/albums/8boz0f1lc3hruuwoyr5vhfdgcixu4mg7tsxhghbbtqq3z3plmh1epspcho13.webp" alt="Annapurna Khabar" loading="lazy" onerror="this.remove()"></div>
+        <h4>अख्तियार दुरुपयोग अनुसन्धान आयोगले गयो एकैसाथ तीन मुद्दा दायर</h4>
+        <time>२०२३, साउन १७</time>
+      </div>
+      <div class="news-card" onclick="showPage('khabar')">
+        <div class="news-card-img-wrap"><img class="news-card-img" src="https://annapurnaradio.prixacdn.net/media/albums/pxeidv195av8eorqom8mlk2aoj3yiuvzkh5rg4sd3lvbghmbmdtnjnjbqv06.JPG" alt="Annapurna Khabar" loading="lazy" onerror="this.remove()"></div>
+        <h4>दोस्रो अवाकस च्याम्पियनसिप प्रतियोगिता सम्पन्न, शब्दास नेपाल च्याम्पियन</h4>
+        <time>२०२३, साउन १७</time>
+      </div>
+      <div class="news-card" onclick="showPage('khabar')">
+        <div class="news-card-img-wrap"><img class="news-card-img" src="https://annapurnaradio.prixacdn.net/media/albums/ua5vv6itrawcnkvofmo7rm5p6lqgxzvp8yrylwoen8ifxsxmz6lepbfx7gyt.jpg" alt="Annapurna Khabar" loading="lazy" onerror="this.remove()"></div>
+        <h4>एमाले अध्यक्ष ओलीको नेतृत्वमा नयाँ सरकार गठन हुदँ</h4>
+        <time>२०२३, साउन १६</time>
+      </div>
+      <div class="news-card" onclick="showPage('khabar')">
+        <div class="news-card-img-wrap"><img class="news-card-img" src="https://www.radioannapurnanepal.com/media/1680363706.jpg" alt="Annapurna Khabar" loading="lazy" onerror="this.remove()"></div>
+        <h4>विश्वकप क्रिकेट प्रतियोगिता : नेपाल बहुलादेशसँग २१ रनले पराजित</h4>
+        <time>२०२३, साउन १५</time>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gallery -->
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title">Gallery</h2>
+    </div>
+    <div class="gallery-tabs">
+      <div class="g-tab active" onclick="switchGallery('photo',this)">&#128247; Photo Gallery</div>
+      <div class="g-tab" onclick="switchGallery('video',this)">&#127916; Video Gallery</div>
+      <div class="g-tab" onclick="switchGallery('audio',this)">&#127925; Audio Gallery</div>
+    </div>
+    <div class="gallery-grid" id="galleryGrid">
+      <div class="gallery-item" style="background:linear-gradient(135deg,#8B0000,#C41E3A)"><img class="ph-img" src="https://annapurnaradio.prixacdn.net/media/albums/dzdwwsyeqya4tnn51rhirv7hgdw6nxgndwm9h8znqojtmhetuuffibml1h2r.jpg" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()">
+        <span>&#128247;</span>
+        <div class="gallery-item-overlay"><div class="play-overlay">&#128247;</div></div>
+      </div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#4a0000,#B22234)"><img class="ph-img" src="https://annapurnaradio.prixacdn.net/media/albums/8boz0f1lc3hruuwoyr5vhfdgcixu4mg7tsxhghbbtqq3z3plmh1epspcho13.webp" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()">
+        <span>&#128247;</span>
+        <div class="gallery-item-overlay"><div class="play-overlay">&#128247;</div></div>
+      </div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#9B1830,#E8293F)"><img class="ph-img" src="https://annapurnaradio.prixacdn.net/media/albums/pxeidv195av8eorqom8mlk2aoj3yiuvzkh5rg4sd3lvbghmbmdtnjnjbqv06.JPG" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()">
+        <span>&#128247;</span>
+        <div class="gallery-item-overlay"><div class="play-overlay">&#128247;</div></div>
+      </div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#700,#C41E3A)"><img class="ph-img" src="https://annapurnaradio.prixacdn.net/media/albums/ua5vv6itrawcnkvofmo7rm5p6lqgxzvp8yrylwoen8ifxsxmz6lepbfx7gyt.jpg" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()">
+        <span>&#127956;</span>
+        <div class="gallery-item-overlay"><div class="play-overlay">&#128247;</div></div>
+      </div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#600,#A01528)"><img class="ph-img" src="https://www.radioannapurnanepal.com/media/1680363706.jpg" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()">
+        <span>&#127928;</span>
+        <div class="gallery-item-overlay"><div class="play-overlay">&#128247;</div></div>
+      </div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#8B0000,#C41E3A)"><img class="ph-img" src="https://www.radioannapurnanepal.com/media/1634638956.png" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()">
+        <span>&#128247;</span>
+        <div class="gallery-item-overlay"><div class="play-overlay">&#128247;</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Podcast highlight -->
+  <div class="section section-alt">
+    <div class="section-header">
+      <h2 class="section-title">Podcast</h2>
+      <a class="view-all" href="#" onclick="showPage('podcast');return false">All Episodes &#8250;</a>
+    </div>
+    <div class="podcast-list">
+      <div class="podcast-item">
+        <div class="pod-icon"><img class="ph-fill" src="https://annapurnaradio.prixacdn.net/media/albums/dzdwwsyeqya4tnn51rhirv7hgdw6nxgndwm9h8znqojtmhetuuffibml1h2r.jpg" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()"></div>
+        <div class="pod-info">
+          <h4>पेट्रोलमा मूल्य बढाएर भएको २० करोड घोटलामा मन्नी नै जिम्मेवार ! शिवकुमार श्रेष्ठ</h4>
+          <span>Latest · 28 min</span>
+        </div>
+        <div class="pod-listen">&#9654; Listen</div>
+      </div>
+      <div class="podcast-item">
+        <div class="pod-icon"><img class="ph-fill" src="https://annapurnaradio.prixacdn.net/media/albums/8boz0f1lc3hruuwoyr5vhfdgcixu4mg7tsxhghbbtqq3z3plmh1epspcho13.webp" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()"></div>
+        <div class="pod-info">
+          <h4>बैदेशिक रोजगारीमा पठाउने परे दक्ष कामदार पठाउनुपर्छ - कुल आचार्य</h4>
+          <span>2 days ago · 35 min</span>
+        </div>
+        <div class="pod-listen">&#9654; Listen</div>
+      </div>
+      <div class="podcast-item">
+        <div class="pod-icon"><img class="ph-fill" src="https://annapurnaradio.prixacdn.net/media/albums/pxeidv195av8eorqom8mlk2aoj3yiuvzkh5rg4sd3lvbghmbmdtnjnjbqv06.JPG" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()"></div>
+        <div class="pod-info">
+          <h4>वैज्ञानिक भूमि व्यवस्था लागु नगरेसम्म मुलुक समृद्ध हुन नसक्ने - पद्मा आचार्य</h4>
+          <span>3 days ago · 42 min</span>
+        </div>
+        <div class="pod-listen">&#9654; Listen</div>
+      </div>
+      <div class="podcast-item">
+        <div class="pod-icon"><img class="ph-fill" src="https://annapurnaradio.prixacdn.net/media/albums/ua5vv6itrawcnkvofmo7rm5p6lqgxzvp8yrylwoen8ifxsxmz6lepbfx7gyt.jpg" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()"></div>
+        <div class="pod-info">
+          <h4>राप्रपाले हिन्दुधर्म र राजसंस्थाको एजेण्डा परिवर्तन गर्नुपर्छ - डा. सुरेन्द्र भण्डारी</h4>
+          <span>4 days ago · 38 min</span>
+        </div>
+        <div class="pod-listen">&#9654; Listen</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Know Your RJ -->
+  <div class="section section-red">
+    <div class="section-header">
+      <h2 class="section-title">Know Your RJ</h2>
+      <a class="view-all" href="#">Meet All RJs &#8250;</a>
+    </div>
+    <div class="rj-grid">
+      <div class="rj-card">
+        <div class="rj-avatar" style="background:linear-gradient(135deg,rgba(255,255,255,.2),rgba(255,255,255,.05));border-color:rgba(255,255,255,.4)"><img class="ph-fill" src="https://annapurnaradio.prixacdn.net/media/wbewkcu7nm54nokotnlwcedxiozh9h4wtnjkv1dy615kfntephqsdmd1iorz.jpeg" alt="Roshan Thapa Magar" loading="lazy" onerror="this.remove()"></div>
+        <h4 style="color:#fff">Roshan Thapa Magar</h4>
+        <span>Morning Show RJ</span>
+      </div>
+      <div class="rj-card">
+        <div class="rj-avatar" style="background:linear-gradient(135deg,rgba(255,255,255,.2),rgba(255,255,255,.05));border-color:rgba(255,255,255,.4)">&#128105;</div>
+        <h4 style="color:#fff">Shanushree Danawi</h4>
+        <span>Afternoon RJ</span>
+      </div>
+      <div class="rj-card">
+        <div class="rj-avatar" style="background:linear-gradient(135deg,rgba(255,255,255,.2),rgba(255,255,255,.05));border-color:rgba(255,255,255,.4)"><img class="ph-fill" src="https://annapurnaradio.prixacdn.net/media/r3i95flyuwlvfbta5xua2s1yzkcym3gx0meyzmsc4jnyxocwrb1duhvjma0q.jpeg" alt="Suraj Paudel" loading="lazy" onerror="this.remove()"></div>
+        <h4 style="color:#fff">Suraj Paudel</h4>
+        <span>Evening Show RJ</span>
+      </div>
+      <div class="rj-card">
+        <div class="rj-avatar" style="background:linear-gradient(135deg,rgba(255,255,255,.2),rgba(255,255,255,.05));border-color:rgba(255,255,255,.4)"><img class="ph-fill" src="https://annapurnaradio.prixacdn.net/media/7txi6rvtppajnyyctyhttaji3i7yz4ddh6ypnrmkvcmkioajzmq67jjbwdek.jpg" alt="Bp Koirala" loading="lazy" onerror="this.remove()"></div>
+        <h4 style="color:#fff">Bp Koirala</h4>
+        <span>News Anchor</span>
+      </div>
+      <div class="rj-card">
+        <div class="rj-avatar" style="background:linear-gradient(135deg,rgba(255,255,255,.2),rgba(255,255,255,.05));border-color:rgba(255,255,255,.4)"><img class="ph-fill" src="https://annapurnaradio.prixacdn.net/media/rizisbqnnedicr9cpdqhc6iqbfdxlbntffnbu2g5pi03i6bdxlhgjqexomwq.jpeg" alt="Chabi Raman Silwal" loading="lazy" onerror="this.remove()"></div>
+        <h4 style="color:#fff">Chabi Raman Silwal</h4>
+        <span>Night Show RJ</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- About -->
+  <div class="section">
+    <div class="about-grid">
+      <div class="about-visual"><img class="ph-img dim" src="https://annapurnaradio.prixacdn.net/static/assets/images/radio-banner.png" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()">
+        <div class="big-logo"><span class="bf">−94.0−</span><span>Radio<br>Annapurna<br>Nepal</span></div>
+        <p>Broadcasting since 2009</p>
+      </div>
+      <div class="about-text">
+        <h2>About Radio Annapurna Nepal</h2>
+        <p>Radio Annapurna Nepal 94.0 has a unique identity amongst listeners in radio broadcasting services, conducted by Radio Annapurna P. Ltd. The central focus of our transmission is to produce and broadcast trustworthy information, informative programs, and entertaining content.</p>
+        <p>We are centered towards the production and transmission of radio programs which follow the guidelines of professionalism and social responsibility. We regularly work for credible information dissemination practice.</p>
+        <a class="btn-red" href="#">Read More &#8250;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sister Concern -->
+  <div class="section section-alt" style="text-align:center">
+    <h2 style="font-size:20px;font-weight:900;margin-bottom:28px;color:var(--black)">Sister Concern</h2>
+    <div class="sister-grid">
+      <a href="#" class="sister-logo"><img src="https://annapurnaradio.prixacdn.net/static/assets/images/annapurna.png" alt="Annapurna Post" style="height:40px;object-fit:contain"></a>
+      <a href="https://www.annapurnapost.com/" target="_blank" class="sister-logo"><img src="https://annapurnaradio.prixacdn.net/static/assets/images/a-annapurna.png" alt="Annapurna" style="height:40px;object-fit:contain"></a>
+      <a href="https://theannapurnaexpress.com/" target="_blank" class="sister-logo"><img src="https://annapurnaradio.prixacdn.net/static/assets/images/express.png" alt="The Annapurna Express" style="height:40px;object-fit:contain"></a>
+      <a href="https://www.amnaiapp.com/download/now" target="_blank" class="sister-logo"><img src="https://annapurnapost.prixacdn.net/media/albums/Annapurna_post_vyuqFokPQz.png" alt="AMNA App" style="height:48px;object-fit:contain"></a>
+    </div>
+  </div>
+
+  <!-- Get Connected -->
+  <div class="section section-alt" style="text-align:center;padding-bottom:0">
+    <h2 style="font-size:20px;font-weight:900;margin-bottom:20px;color:var(--black)">Get Connected</h2>
+    <div style="display:flex;gap:14px;justify-content:center;margin-bottom:32px">
+      <a href="https://www.facebook.com/radioannapurnanepal/" target="_blank" class="gc-icon" title="Facebook">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      </a>
+      <a href="https://twitter.com/AnnapurnaNepal" target="_blank" class="gc-icon" title="Twitter / X">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/radio.annapurna/" target="_blank" class="gc-icon" title="Instagram">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+      <a href="https://www.youtube.com/@radioannapurnanepal94mhz41" target="_blank" class="gc-icon" title="YouTube">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/></svg>
+      </a>
+      <a href="mailto:annapurnapost.com@gmail.com" class="gc-icon" title="Email">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
+    </div>
+    <h2 style="font-size:20px;font-weight:900;margin-bottom:14px;color:var(--black)">Contact</h2>
+    <p style="font-size:13px;color:var(--gray-600);margin-bottom:6px">
+      कर्पोरेट टावर, तीनकुने, काठमाडौं &nbsp;&nbsp; पोष्ट बक्स नं २५१९९
+    </p>
+    <p style="font-size:13px;margin-bottom:32px">
+      <a href="mailto:annapurnapost.com@gmail.com" style="color:var(--red);font-weight:600">annapurnapost.com@gmail.com</a>
+      &nbsp;&nbsp;
+      <a href="mailto:marketing.3ni@amnnepal.com" style="color:var(--red);font-weight:600">marketing.3ni@amnnepal.com</a>
+    </p>
+    <div style="border-top:1px solid var(--gray-200);padding:16px 0;font-size:12px;color:var(--gray-400)">
+      Radio Annapurna Nepal - 2026. All Rights Reserved.
+    </div>
+  </div>
+
+</section>
+
+<!-- ══ PROGRAM SCHEDULE ══ -->
+<section class="page-section fade-in" id="page-program">
+  <div class="page-header">
+    <div class="breadcrumb"><span onclick="showPage('home')" style="cursor:pointer">Home</span> <span>›</span> <span>Program Schedule</span></div>
+    <h1>Program Schedule</h1>
+  </div>
+  <div class="section">
+    <div class="day-tabs" id="dayTabs">
+      <div class="day-tab active" onclick="switchDay('sunday',this)">Sunday</div>
+      <div class="day-tab" onclick="switchDay('monday',this)">Monday</div>
+      <div class="day-tab" onclick="switchDay('tuesday',this)">Tuesday</div>
+      <div class="day-tab" onclick="switchDay('wednesday',this)">Wednesday</div>
+      <div class="day-tab" onclick="switchDay('thursday',this)">Thursday</div>
+      <div class="day-tab" onclick="switchDay('friday',this)">Friday</div>
+      <div class="day-tab" onclick="switchDay('saturday',this)">Saturday</div>
+    </div>
+
+    <!-- Each day has same programs, just shown for one day as example -->
+    <div id="day-sunday" class="day-panel active">
+      <div class="schedule-list" id="schedList">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+    <div id="day-monday" class="day-panel"><div class="schedule-list" id="schedListMon"></div></div>
+    <div id="day-tuesday" class="day-panel"><div class="schedule-list" id="schedListTue"></div></div>
+    <div id="day-wednesday" class="day-panel"><div class="schedule-list" id="schedListWed"></div></div>
+    <div id="day-thursday" class="day-panel"><div class="schedule-list" id="schedListThu"></div></div>
+    <div id="day-friday" class="day-panel"><div class="schedule-list" id="schedListFri"></div></div>
+    <div id="day-saturday" class="day-panel"><div class="schedule-list" id="schedListSat"></div></div>
+  </div>
+</section>
+
+<!-- ══ ANNAPURNA KHABAR ══ -->
+<section class="page-section fade-in" id="page-khabar">
+  <div class="khabar-hero">
+    <div class="breadcrumb" style="font-size:11px;opacity:.6;margin-bottom:6px;display:flex;gap:6px"><span onclick="showPage('home')" style="cursor:pointer;color:#fff">Home</span> <span style="color:#fff">›</span> <span style="color:#fff">Annapurna Khabar</span></div>
+    <h1>Annapurna Khabar</h1>
+  </div>
+  <div class="section">
+    <div class="news-grid" style="grid-template-columns:repeat(auto-fill,minmax(180px,1fr))">
+      <div class="news-card"><div class="news-card-img-wrap"><img class="news-card-img" src="https://www.radioannapurnanepal.com/media/1634638956.png" alt="Annapurna Khabar" loading="lazy" onerror="this.remove()"></div><h4>काठमाडौं लिगेसीको आयोजनामा मित्रपार्कमा 'यःमरी पुही युनिटि फेस्ट' हुदँ</h4><time>२०२३, साउन १८</time></div>
+      <div class="news-card"><div class="news-card-img-wrap"><img class="news-card-img" src="https://annapurnaradio.prixacdn.net/media/albums/dzdwwsyeqya4tnn51rhirv7hgdw6nxgndwm9h8znqojtmhetuuffibml1h2r.jpg" alt="Annapurna Khabar" loading="lazy" onerror="this.remove()"></div><h4>अख्तियार दुरुपयोग अनुसन्धान आयोगले गयो एकैसाथ तीन मुद्दा दायर</h4><time>२०२३, साउन १७</time></div>
+      <div class="news-card"><div class="news-card-img-wrap"><img class="news-card-img" src="https://annapurnaradio.prixacdn.net/media/albums/8boz0f1lc3hruuwoyr5vhfdgcixu4mg7tsxhghbbtqq3z3plmh1epspcho13.webp" alt="Annapurna Khabar" loading="lazy" onerror="this.remove()"></div><h4>दोस्रो अवाकस च्याम्पियनसिप प्रतियोगिता सम्पन्न, शब्दास नेपाल च्याम्पियन</h4><time>२०२३, साउन १७</time></div>
+      <div class="news-card"><div class="news-card-img-wrap"><img class="news-card-img" src="https://annapurnaradio.prixacdn.net/media/albums/pxeidv195av8eorqom8mlk2aoj3yiuvzkh5rg4sd3lvbghmbmdtnjnjbqv06.JPG" alt="Annapurna Khabar" loading="lazy" onerror="this.remove()"></div><h4>शिवरुद्र कर्मचार्यद्वारा निर्मित यन्त्र सार्वजनिक</h4><time>२०२३, साउन १७</time></div>
+      <div class="news-card"><div class="news-card-img-wrap"><img class="news-card-img" src="https://annapurnaradio.prixacdn.net/media/albums/ua5vv6itrawcnkvofmo7rm5p6lqgxzvp8yrylwoen8ifxsxmz6lepbfx7gyt.jpg" alt="Annapurna Khabar" loading="lazy" onerror="this.remove()"></div><h4>पहिलो संस्करणको एनपिएलको उपाधि जनकपुर बोल्टसलाई</h4><time>२०२३, साउन १६</time></div>
+      <div class="news-card"><div class="news-card-img-wrap"><img class="news-card-img" src="https://www.radioannapurnanepal.com/media/1680363706.jpg" alt="Annapurna Khabar" loading="lazy" onerror="this.remove()"></div><h4>निभा डंगोलको चा:बहि दबु संग सामुहिक प्रस्तुति सहित चा:बहि नख: हुदँ</h4><time>२०२३, साउन १६</time></div>
+      <div class="news-card"><div class="news-card-img-wrap"><img class="news-card-img" src="https://www.radioannapurnanepal.com/media/1634638956.png" alt="Annapurna Khabar" loading="lazy" onerror="this.remove()"></div><h4>'आउन फर्कौ' बोलको गीत सार्वजनिक</h4><time>२०२३, साउन १५</time></div>
+      <div class="news-card"><div class="news-card-img-wrap"><img class="news-card-img" src="https://annapurnaradio.prixacdn.net/media/albums/dzdwwsyeqya4tnn51rhirv7hgdw6nxgndwm9h8znqojtmhetuuffibml1h2r.jpg" alt="Annapurna Khabar" loading="lazy" onerror="this.remove()"></div><h4>गौशाला धर्मशाला विवाद : पर्यटनमन्त्रीद्वारा परिषद् बैठक आह्वान</h4><time>२०२३, साउन १५</time></div>
+      <div class="news-card"><div class="news-card-img-wrap"><img class="news-card-img" src="https://annapurnaradio.prixacdn.net/media/albums/8boz0f1lc3hruuwoyr5vhfdgcixu4mg7tsxhghbbtqq3z3plmh1epspcho13.webp" alt="Annapurna Khabar" loading="lazy" onerror="this.remove()"></div><h4>नशामुक्त नेपालका लागि हजारौंको संख्यामा जनजागरण पदयात्रा सम्पन्न</h4><time>२०२३, साउन १५</time></div>
+      <div class="news-card"><div class="news-card-img-wrap"><img class="news-card-img" src="https://annapurnaradio.prixacdn.net/media/albums/pxeidv195av8eorqom8mlk2aoj3yiuvzkh5rg4sd3lvbghmbmdtnjnjbqv06.JPG" alt="Annapurna Khabar" loading="lazy" onerror="this.remove()"></div><h4>एमाले अध्यक्ष ओलीको नेतृत्वमा नयाँ सरकार गठन हुदँ</h4><time>२०२३, साउन १४</time></div>
+      <div class="news-card"><div class="news-card-img-wrap"><img class="news-card-img" src="https://annapurnaradio.prixacdn.net/media/albums/ua5vv6itrawcnkvofmo7rm5p6lqgxzvp8yrylwoen8ifxsxmz6lepbfx7gyt.jpg" alt="Annapurna Khabar" loading="lazy" onerror="this.remove()"></div><h4>विश्वकप क्रिकेट प्रतियोगिता : नेपाल बहुलादेशसँग २१ रनले पराजित</h4><time>२०२३, साउन १४</time></div>
+      <div class="news-card"><div class="news-card-img-wrap"><img class="news-card-img" src="https://www.radioannapurnanepal.com/media/1680363706.jpg" alt="Annapurna Khabar" loading="lazy" onerror="this.remove()"></div><h4>चित्रकला प्रतियोगितामा छिरड र अखिल प्रथम</h4><time>२०२३, साउन १३</time></div>
+      <div class="news-card"><div class="news-card-img-wrap"><img class="news-card-img" src="https://www.radioannapurnanepal.com/media/1634638956.png" alt="Annapurna Khabar" loading="lazy" onerror="this.remove()"></div><h4>रोशन लामाको गायनमा तथा शिल्पा मार्सेलको अभिनयमा 'नक्कले' सार्वजनिक</h4><time>२०२३, साउन १३</time></div>
+      <div class="news-card"><div class="news-card-img-wrap"><img class="news-card-img" src="https://annapurnaradio.prixacdn.net/media/albums/dzdwwsyeqya4tnn51rhirv7hgdw6nxgndwm9h8znqojtmhetuuffibml1h2r.jpg" alt="Annapurna Khabar" loading="lazy" onerror="this.remove()"></div><h4>'भक्तपुर म्युजिकल फेस्ट' आयोजना हुदँ</h4><time>२०२३, साउन १२</time></div>
+      <div class="news-card"><div class="news-card-img-wrap"><img class="news-card-img" src="https://annapurnaradio.prixacdn.net/media/albums/8boz0f1lc3hruuwoyr5vhfdgcixu4mg7tsxhghbbtqq3z3plmh1epspcho13.webp" alt="Annapurna Khabar" loading="lazy" onerror="this.remove()"></div><h4>प्रमुख विपक्षीदलको वेल घेराबीच प्रधानमन्त्रीलाई विश्वासको मत</h4><time>२०२३, साउन १२</time></div>
+    </div>
+    <!-- Pagination -->
+    <div style="display:flex;gap:6px;justify-content:center;margin-top:32px">
+      <button style="width:36px;height:36px;border-radius:4px;background:var(--red);color:#fff;font-weight:700;border:none;cursor:pointer">1</button>
+      <button style="width:36px;height:36px;border-radius:4px;background:#f3f3f3;color:#333;font-weight:600;border:1px solid #e5e5e5;cursor:pointer">2</button>
+      <button style="width:36px;height:36px;border-radius:4px;background:#f3f3f3;color:#333;font-weight:600;border:1px solid #e5e5e5;cursor:pointer">3</button>
+      <button style="width:36px;height:36px;border-radius:4px;background:#f3f3f3;color:#333;font-weight:600;border:1px solid #e5e5e5;cursor:pointer">…</button>
+      <button style="width:36px;height:36px;border-radius:4px;background:#f3f3f3;color:#333;font-weight:600;border:1px solid #e5e5e5;cursor:pointer">›</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EVENT ══ -->
+<section class="page-section fade-in" id="page-event">
+  <div class="page-header">
+    <div class="breadcrumb"><span onclick="showPage('home')" style="cursor:pointer">Home</span> <span>›</span> <span>Events</span></div>
+    <h1>Events</h1>
+  </div>
+  <!-- On Air strip (compact) -->
+  <div class="onair-strip">
+    <div class="onair-card current">
+      <span class="onair-label">&#9673; Live On Air</span>
+      <span class="onair-time">6:30 a.m. – 7 a.m.</span>
+      <span class="onair-prog">Radio Power (Repeat)</span>
+    </div>
+    <div class="onair-card"><span class="onair-label">Coming Up Next</span><span class="onair-time">7:00–8:00 a.m.</span><span class="onair-prog">Shubharambha</span></div>
+    <div class="onair-card"><span class="onair-label">Later On</span><span class="onair-time">8:00–9:00 a.m.</span><span class="onair-prog">Sauryya Chatari</span></div>
+    <div class="onair-card"><span class="onair-label" onclick="showPage('program')" style="cursor:pointer;text-decoration:underline">View Program Schedule ›</span><span class="onair-prog" style="color:transparent">–</span></div>
+  </div>
+  <div class="section">
+    <div class="event-grid">
+      <div class="event-card">
+        <div class="event-thumb" style="background:linear-gradient(135deg,#1a1a2e,#C41E3A)"><img class="ph-img" src="https://annapurnaradio.prixacdn.net/media/albums/dzdwwsyeqya4tnn51rhirv7hgdw6nxgndwm9h8znqojtmhetuuffibml1h2r.jpg" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()">
+          <span>&#127981;</span>
+          <span class="event-thumb-badge">EVENT</span>
+        </div>
+        <div class="event-body"><h4>चर्चामा आज</h4><span>Regular Program · Live Debate</span></div>
+      </div>
+      <div class="event-card">
+        <div class="event-thumb" style="background:linear-gradient(135deg,#5a3000,#C41E3A)"><img class="ph-img" src="https://annapurnaradio.prixacdn.net/media/albums/8boz0f1lc3hruuwoyr5vhfdgcixu4mg7tsxhghbbtqq3z3plmh1epspcho13.webp" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()">
+          <span>&#9997;&#65039;</span>
+          <span class="event-thumb-badge">PAST EVENT</span>
+        </div>
+        <div class="event-body"><h4>Bhanu Kabita Mahotsav</h4><span>Bhanubhakta Poetry Festival</span></div>
+      </div>
+      <div class="event-card">
+        <div class="event-thumb" style="background:linear-gradient(135deg,#004020,#C41E3A)"><img class="ph-img" src="https://annapurnaradio.prixacdn.net/media/albums/pxeidv195av8eorqom8mlk2aoj3yiuvzkh5rg4sd3lvbghmbmdtnjnjbqv06.JPG" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()">
+          <span>&#127917;</span>
+          <span class="event-thumb-badge">PAST EVENT</span>
+        </div>
+        <div class="event-body"><h4>Gai Jatra Comedy Challenge</h4><span>Annual Comedy Event</span></div>
+      </div>
+      <div class="event-card">
+        <div class="event-thumb" style="background:linear-gradient(135deg,#3a0050,#C41E3A)"><img class="ph-img" src="https://annapurnaradio.prixacdn.net/media/albums/ua5vv6itrawcnkvofmo7rm5p6lqgxzvp8yrylwoen8ifxsxmz6lepbfx7gyt.jpg" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()">
+          <span>&#9997;&#65039;</span>
+          <span class="event-thumb-badge">PAST EVENT</span>
+        </div>
+        <div class="event-body"><h4>भानु कबिता महोत्सव २०७९</h4><span>Bhanu Poetry Celebration</span></div>
+      </div>
+      <div class="event-card">
+        <div class="event-thumb" style="background:linear-gradient(135deg,#002050,#C41E3A)"><img class="ph-img" src="https://www.radioannapurnanepal.com/media/1680363706.jpg" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()">
+          <span>&#127942;</span>
+          <span class="event-thumb-badge">PAST EVENT</span>
+        </div>
+        <div class="event-body"><h4>Prize Distribution Program</h4><span>Annual Awards Ceremony</span></div>
+      </div>
+      <div class="event-card">
+        <div class="event-thumb" style="background:linear-gradient(135deg,#500040,#C41E3A)"><img class="ph-img" src="https://www.radioannapurnanepal.com/media/1634638956.png" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()">
+          <span>&#127925;</span>
+          <span class="event-thumb-badge">PAST EVENT</span>
+        </div>
+        <div class="event-body"><h4>Teej Singing Competition</h4><span>तीज मनाउने, रेडियोमा गाउने</span></div>
+      </div>
+      <div class="event-card">
+        <div class="event-thumb" style="background:linear-gradient(135deg,#004040,#C41E3A)"><img class="ph-img" src="https://annapurnaradio.prixacdn.net/media/albums/dzdwwsyeqya4tnn51rhirv7hgdw6nxgndwm9h8znqojtmhetuuffibml1h2r.jpg" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()">
+          <span>&#9997;&#65039;</span>
+          <span class="event-thumb-badge">PAST EVENT</span>
+        </div>
+        <div class="event-body"><h4>About Bhanu Kabita Mahautsav 2079</h4><span>Documentary Feature</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PODCAST ══ -->
+<section class="page-section fade-in" id="page-podcast">
+  <div class="page-header">
+    <div class="breadcrumb"><span onclick="showPage('home')" style="cursor:pointer">Home</span> <span>›</span> <span>Podcast</span></div>
+    <h1>Podcast</h1>
+  </div>
+  <div class="onair-strip">
+    <div class="onair-card current"><span class="onair-label">&#9673; Live On Air</span><span class="onair-time">6:30–7:00 a.m.</span><span class="onair-prog">Radio Power (Repeat)</span></div>
+    <div class="onair-card"><span class="onair-label">Coming Up Next</span><span class="onair-time">7:00–8:00 a.m.</span><span class="onair-prog">Shubharambha</span></div>
+    <div class="onair-card"><span class="onair-label">Later On</span><span class="onair-time">10:00–10:30 a.m.</span><span class="onair-prog">Mayar Jyu</span></div>
+    <div class="onair-card"><span class="onair-label" onclick="showPage('program')" style="cursor:pointer;text-decoration:underline">View Program Schedule ›</span><span class="onair-prog" style="color:transparent">–</span></div>
+  </div>
+  <div class="section">
+    <div class="podcast-list">
+      <div class="podcast-item"><div class="pod-icon"><img class="ph-fill" src="https://www.radioannapurnanepal.com/media/1680363706.jpg" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()"></div><div class="pod-info"><h4>पेट्रोलमा मूल्य बढाएर भएको २० करोड घोटलामा मन्नी नै जिम्मेवार ! शिवकुमार...</h4><span>Latest · 28 min</span></div><div class="pod-listen">&#9654; Listen</div></div>
+      <div class="podcast-item"><div class="pod-icon"><img class="ph-fill" src="https://www.radioannapurnanepal.com/media/1634638956.png" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()"></div><div class="pod-info"><h4>बैदेशिक रोजगारीमा पठाउने परे दक्ष कामदार पठाउनुपर्छ - कुल आचार्य</h4><span>2 days ago · 35 min</span></div><div class="pod-listen">&#9654; Listen</div></div>
+      <div class="podcast-item"><div class="pod-icon"><img class="ph-fill" src="https://annapurnaradio.prixacdn.net/media/albums/dzdwwsyeqya4tnn51rhirv7hgdw6nxgndwm9h8znqojtmhetuuffibml1h2r.jpg" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()"></div><div class="pod-info"><h4>पुस्तक एक्लो महारथी भित्र के छ ? साहित्यकार महेश क्षितिज र कवि एवं...</h4><span>3 days ago · 30 min</span></div><div class="pod-listen">&#9654; Listen</div></div>
+      <div class="podcast-item"><div class="pod-icon"><img class="ph-fill" src="https://annapurnaradio.prixacdn.net/media/albums/8boz0f1lc3hruuwoyr5vhfdgcixu4mg7tsxhghbbtqq3z3plmh1epspcho13.webp" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()"></div><div class="pod-info"><h4>वैज्ञानिक भूमि व्यवस्था लागु नगरेसम्म मुलुक समृद्ध हुन नसक्ने - पद्मा आचार्य</h4><span>4 days ago · 42 min</span></div><div class="pod-listen">&#9654; Listen</div></div>
+      <div class="podcast-item"><div class="pod-icon"><img class="ph-fill" src="https://annapurnaradio.prixacdn.net/media/albums/pxeidv195av8eorqom8mlk2aoj3yiuvzkh5rg4sd3lvbghmbmdtnjnjbqv06.JPG" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()"></div><div class="pod-info"><h4>लघुकथालाई अब विश्वविद्यालयमा पढाउनुपर्छ - उपप्राध्यापक, डा. विदुर चालिसे</h4><span>5 days ago · 25 min</span></div><div class="pod-listen">&#9654; Listen</div></div>
+      <div class="podcast-item"><div class="pod-icon"><img class="ph-fill" src="https://annapurnaradio.prixacdn.net/media/albums/ua5vv6itrawcnkvofmo7rm5p6lqgxzvp8yrylwoen8ifxsxmz6lepbfx7gyt.jpg" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()"></div><div class="pod-info"><h4>राप्रपाले हिन्दुधर्म र राजसंस्थाको एजेण्डा परिवर्तन गर्नुपर्छ - डा. सुरेन्द्र भण्डारी</h4><span>6 days ago · 38 min</span></div><div class="pod-listen">&#9654; Listen</div></div>
+      <div class="podcast-item"><div class="pod-icon"><img class="ph-fill" src="https://www.radioannapurnanepal.com/media/1680363706.jpg" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()"></div><div class="pod-info"><h4>पार्टीले कारबाही गरिसकेका व्यक्तिलाई सभामुखले काखी च्याप्रे काम गरेको छ...</h4><span>1 week ago · 32 min</span></div><div class="pod-listen">&#9654; Listen</div></div>
+      <div class="podcast-item"><div class="pod-icon"><img class="ph-fill" src="https://www.radioannapurnanepal.com/media/1634638956.png" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()"></div><div class="pod-info"><h4>राप्रपाले हिन्दुधर्म र राजसंस्थाको एजेण्डा परिवर्तन गर्नुपर्छ - डा. सुरेन्द्र भण्डारी</h4><span>1 week ago · 38 min</span></div><div class="pod-listen">&#9654; Listen</div></div>
+      <div class="podcast-item"><div class="pod-icon"><img class="ph-fill" src="https://annapurnaradio.prixacdn.net/media/albums/dzdwwsyeqya4tnn51rhirv7hgdw6nxgndwm9h8znqojtmhetuuffibml1h2r.jpg" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()"></div><div class="pod-info"><h4>बाका लघुकथाहरूले यथार्थ बेलेका छन् - शेखर अर्याल - एडमिन, नमस्ते आधुनिक...</h4><span>2 weeks ago · 22 min</span></div><div class="pod-listen">&#9654; Listen</div></div>
+      <div class="podcast-item"><div class="pod-icon"><img class="ph-fill" src="https://annapurnaradio.prixacdn.net/media/albums/8boz0f1lc3hruuwoyr5vhfdgcixu4mg7tsxhghbbtqq3z3plmh1epspcho13.webp" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()"></div><div class="pod-info"><h4>कार्यक्रम किताबमा ठाडो भाका पुस्तकका लेखक, साहित्यकार एवं इतिहासविद ला...</h4><span>2 weeks ago · 45 min</span></div><div class="pod-listen">&#9654; Listen</div></div>
+      <div class="podcast-item"><div class="pod-icon"><img class="ph-fill" src="https://annapurnaradio.prixacdn.net/media/albums/pxeidv195av8eorqom8mlk2aoj3yiuvzkh5rg4sd3lvbghmbmdtnjnjbqv06.JPG" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()"></div><div class="pod-info"><h4>कृषिलाई अब राष्ट्रिय बहसमा राख्नु पर्छ - उद्धव अधिकारी, संयोजक, खाद्यको लागि...</h4><span>3 weeks ago · 29 min</span></div><div class="pod-listen">&#9654; Listen</div></div>
+      <div class="podcast-item"><div class="pod-icon"><img class="ph-fill" src="https://annapurnaradio.prixacdn.net/media/albums/ua5vv6itrawcnkvofmo7rm5p6lqgxzvp8yrylwoen8ifxsxmz6lepbfx7gyt.jpg" alt="Radio Annapurna Nepal" loading="lazy" onerror="this.remove()"></div><div class="pod-info"><h4>माओवादीले जनयुद्धमा लुटेका पैसालाई सेतो बनाउने प्रयास भयो - सुशीलमान...</h4><span>1 month ago · 50 min</span></div><div class="pod-listen">&#9654; Listen</div></div>
+    </div>
+    <div style="display:flex;gap:6px;justify-content:center;margin-top:28px">
+      <button style="width:36px;height:36px;border-radius:4px;background:var(--red);color:#fff;font-weight:700;border:none;cursor:pointer">1</button>
+      <button style="width:36px;height:36px;border-radius:4px;background:#f3f3f3;color:#333;font-weight:600;border:1px solid #e5e5e5;cursor:pointer">2</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══ LISTEN LIVE ══ -->
+<section class="page-section fade-in" id="page-listen">
+  <div class="listen-hero">
+    <div style="font-size:10px;opacity:.6;margin-bottom:16px;letter-spacing:2px;text-transform:uppercase">
+      <span onclick="showPage('home')" style="cursor:pointer">Home</span> › Listen Live
+    </div>
+    <div class="big-play" onclick="togglePlay()">&#9654;</div>
+    <h1>Listen Live · Radio Annapurna Nepal</h1>
+    <p>Stream Radio Annapurna Nepal 94.0 live — trustworthy news, informative programs, and great entertainment from Kathmandu.</p>
+    <div class="listen-card">
+      <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;opacity:.6;margin-bottom:8px">ON ANNAPURNA RADIO</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <button style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.4);color:#fff;font-size:16px;cursor:pointer">&#9654;</button>
+        <button style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:14px;cursor:pointer">&#9646;&#9646;</button>
+        <div>
+          <div class="listen-card-prog">Annapurna Khabar</div>
+          <div class="listen-card-time">6:30 a.m. – 7 a.m.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="about-grid">
+      <div class="about-visual">
+        <div class="big-logo"><span class="bf">−94.0−</span><span>Radio<br>Annapurna<br>Nepal</span></div>
+        <p>Nepal's Trusted Radio Voice</p>
+      </div>
+      <div class="about-text">
+        <h2>About Us</h2>
+        <p>Radio Annapurna Nepal 94.0 has a unique identity amongst listeners in radio broadcasting services which is conducted by Radio Annapurna P. Ltd. The central focus of our transmission is to produce and broadcast trustworthy information, informative program and entertaining program to the listener.</p>
+        <p>We are centered towards the production and transmission of radio program which follows the guidelines of professionalism and social responsibility. In other side, we regularly work for credible information dissemination practice.</p>
+        <a class="btn-red" href="#">Read More &#8250;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FOOTER (shared) ════ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h3>Radio Annapurna Nepal 94.0</h3>
+      <p>Nepal's premier FM radio station delivering trustworthy news and entertainment since 2009. Broadcasting from Kathmandu across Nepal.</p>
+      <div style="margin-top:12px;font-size:12px;color:rgba(255,255,255,.4)">
+        कर्पोरेट टावर, तीनकुने, काठमाडौं · पोष्ट बक्स नं २५१९९<br>
+        <a href="mailto:annapurnapost.com@gmail.com" style="color:var(--red)">annapurnapost.com@gmail.com</a><br>
+        <a href="mailto:marketing.3ni@amnnepal.com" style="color:var(--red)">marketing.3ni@amnnepal.com</a>
+      </div>
+      <div class="social-row">
+        <a href="#" class="soc-icon">f</a>
+        <a href="#" class="soc-icon">t</a>
+        <a href="#" class="soc-icon">&#9783;</a>
+        <a href="#" class="soc-icon">&#9654;</a>
+        <a href="#" class="soc-icon">&#9993;</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <div class="footer-links">
+        <a href="#" onclick="showPage('home');return false">Home</a>
+        <a href="#" onclick="showPage('program');return false">Program Schedule</a>
+        <a href="#" onclick="showPage('khabar');return false">Annapurna Khabar</a>
+        <a href="#" onclick="showPage('event');return false">Events</a>
+        <a href="#" onclick="showPage('podcast');return false">Podcast</a>
+        <a href="#" onclick="showPage('listen');return false">Listen Live</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>FM Programs</h4>
+      <div class="footer-links">
+        <a href="#" onclick="showPage('program');return false">Shubharambha</a>
+        <a href="#" onclick="showPage('program');return false">Radio Power</a>
+        <a href="#" onclick="showPage('program');return false">Annapurna Khabar</a>
+        <a href="#" onclick="showPage('program');return false">BBC Nepal Sewa</a>
+        <a href="#" onclick="showPage('program');return false">Annapurna Celebrity</a>
+        <a href="#" onclick="showPage('program');return false">Guru Dristi &amp; Jivan Bigyan</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>Radio Annapurna Nepal &copy; 2026. All Rights Reserved.</span>
+    <span>94.0 FM · Kathmandu, Nepal</span>
+  </div>
+</footer>
+
+<script>
+// ── Program data
+const programs = [
+  {time:'5:00–6:00 a.m.',name:'Sauryya Chatari (S/S)',type:'Music'},
+  {time:'6:00–6:30 a.m.',name:'National Song',type:'Music'},
+  {time:'6:30–7:00 a.m.',name:'Radio Power (Repeat)',type:'News',current:true},
+  {time:'7:00–8:00 a.m.',name:'Shubharambha',type:'Morning'},
+  {time:'8:00–9:00 a.m.',name:'Shubhasrota',type:'Music'},
+  {time:'9:00–10:00 a.m.',name:'Pancha (Thrishna Le Barhau)',type:'Talk'},
+  {time:'10:00–11:00 a.m.',name:'Music with Slogan',type:'Music'},
+  {time:'11:00–12:00 p.m.',name:'Annapurna Celebrity',type:'Talk'},
+  {time:'12:00–1:00 p.m.',name:'Annapurna Ghumaune (S/S)',type:'News'},
+  {time:'1:00–2:00 p.m.',name:'Radio Power',type:'News'},
+  {time:'2:00–3:00 p.m.',name:'Sadhu (Thrishna Le Barhau)',type:'Talk'},
+  {time:'3:00–4:00 p.m.',name:'Song with PSA',type:'Music'},
+  {time:'4:00–5:00 p.m.',name:'Chhaupadhi',type:'Special'},
+  {time:'5:00–6:00 p.m.',name:'Radio Power',type:'News'},
+  {time:'6:00–7:00 p.m.',name:'Guru Dristi & Jivan Bigyan',type:'Talk'},
+  {time:'7:00–8:00 p.m.',name:'BBC Nepal Sewa',type:'News'},
+  {time:'8:00–9:00 p.m.',name:'Mayar Jyu',type:'Music'},
+  {time:'9:00–10:00 p.m.',name:'Music with Slogan',type:'Music'},
+  {time:'10:00–11:00 p.m.',name:'Radio Power (Repeat)',type:'News'},
+  {time:'11:00–12:00 a.m.',name:'Meyor/Subeksha (S/S)',type:'Music'},
+];
+
+const sunPrograms = programs;
+const monPrograms = [
+  {time:'5:00–6:00 a.m.',name:'Radio Power (Repeat)',type:'News',current:true},
+  {time:'6:00–6:30 a.m.',name:'National Song',type:'Music'},
+  {time:'6:30–7:00 a.m.',name:'Shubharambha',type:'Morning'},
+  {time:'7:00–8:00 a.m.',name:'Sauryya Chatari',type:'Music'},
+  {time:'8:00–9:00 a.m.',name:'Pancha (Thrishna Le Barhau)',type:'Talk'},
+  {time:'9:00–10:00 a.m.',name:'Music with Slogan',type:'Music'},
+  {time:'10:00–11:00 a.m.',name:'Annapurna Celebrity',type:'Talk'},
+  {time:'11:00–12:00 p.m.',name:'Annapurna Khabar',type:'News'},
+  {time:'12:00–1:00 p.m.',name:'Radio Power',type:'News'},
+  {time:'1:00–2:00 p.m.',name:'Song with PSA',type:'Music'},
+  {time:'2:00–3:00 p.m.',name:'Radio Power',type:'News'},
+  {time:'3:00–4:00 p.m.',name:'BBC Nepal Sewa',type:'News'},
+  {time:'4:00–5:00 p.m.',name:'Guru Dristi & Jivan Bigyan',type:'Talk'},
+  {time:'5:00–6:00 p.m.',name:'Mayar Jyu',type:'Music'},
+  {time:'6:00–7:00 p.m.',name:'Shubhasrota',type:'Music'},
+  {time:'7:00–8:00 p.m.',name:'Music with Slogan',type:'Music'},
+  {time:'8:00–9:00 p.m.',name:'Radio Power (Repeat)',type:'News'},
+];
+
+function renderSchedule(containerId, data) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  el.innerHTML = data.map(p => `
+    <div class="sched-row${p.current?' current':''}">
+      <span class="sched-row-time">${p.time}</span>
+      <div class="sched-row-icon">&#127925;</div>
+      <div class="sched-row-info">
+        <h4>${p.name}</h4>
+        <span>${p.type} Program</span>
+      </div>
+      <span class="sched-row-type">${p.type}</span>
+    </div>
+  `).join('');
+}
+
+renderSchedule('schedList', sunPrograms);
+renderSchedule('schedListMon', monPrograms);
+['schedListTue','schedListWed','schedListThu','schedListFri','schedListSat'].forEach(id => renderSchedule(id, programs));
+
+// ── Page navigation
+function showPage(page, day) {
+  document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  const target = document.getElementById('page-' + page);
+  if (target) { target.classList.add('active'); }
+  const links = {home:'Home',program:'Program',khabar:'Annapurna Khabar',event:'Event',podcast:'Podcast',listen:'LISTEN LIVE'};
+  document.querySelectorAll('.nav-link').forEach(l => { if (l.textContent.trim() === links[page]) l.classList.add('active'); });
+  if (day) switchDay(day, null);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── Day tabs (program schedule)
+function switchDay(day, el) {
+  document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
+  const panel = document.getElementById('day-' + day);
+  if (panel) panel.classList.add('active');
+  if (el) { el.classList.add('active'); }
+  else {
+    document.querySelectorAll('.day-tab').forEach(t => {
+      if (t.textContent.trim().toLowerCase() === day) t.classList.add('active');
+    });
+  }
+}
+
+// ── Gallery tabs
+function switchGallery(type, el) {
+  document.querySelectorAll('.g-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  const grid = document.getElementById('galleryGrid');
+  const icons = {photo:['&#128247;','&#128247;','&#128247;','&#127956;','&#127928;','&#128247;'],video:['&#127916;','&#127916;','&#127916;','&#127916;','&#127916;','&#127916;'],audio:['&#127925;','&#127925;','&#127911;','&#127927;','&#127907;','&#127925;']};
+  grid.querySelectorAll('.gallery-item span:first-child').forEach((s,i) => { s.innerHTML = (icons[type]||icons.photo)[i]||'&#128247;'; });
+}
+
+// ── Search
+function openSearch() { document.getElementById('searchOverlay').classList.add('open'); document.getElementById('searchInput').focus(); }
+function closeSearch() { document.getElementById('searchOverlay').classList.remove('open'); }
+document.getElementById('searchOverlay').addEventListener('click', function(e){ if(e.target===this) closeSearch(); });
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeSearch(); });
+
+// ── Play toggle
+var playing = false;
+function togglePlay() {
+  playing = !playing;
+  const btn = document.getElementById('playBtn');
+  if (btn) btn.innerHTML = playing ? '&#9646;&#9646;' : '&#9654;';
+}
+</script>
+</body>
+</html>
